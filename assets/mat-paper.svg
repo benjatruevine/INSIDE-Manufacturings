@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" role="img" aria-label="Stacked and bundled waste paper and cardboard for recycling">
+  <defs>
+    <linearGradient id="wbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EBEEF1"/>
+      <stop offset="1" stop-color="#CCD4DA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" fill="url(#wbg)"/>
+  <rect y="500" width="800" height="140" fill="#B6BFC7"/>
+  <g>
+    <rect x="140" y="380" width="240" height="120" rx="6" fill="#C8A26B"/>
+    <rect x="155" y="395" width="210" height="90" rx="4" fill="#D9B87F"/>
+    <g stroke="#B08A52" stroke-width="5">
+      <path d="M155 425 H365"/>
+      <path d="M155 455 H365"/>
+    </g>
+    <rect x="180" y="360" width="16" height="140" fill="#8A6A3C"/>
+    <rect x="324" y="360" width="16" height="140" fill="#8A6A3C"/>
+  </g>
+  <g>
+    <rect x="420" y="350" width="240" height="150" rx="6" fill="#AAB4BC"/>
+    <rect x="438" y="368" width="204" height="114" rx="4" fill="#C4CDD4"/>
+    <g stroke="#8A939D" stroke-width="5">
+      <path d="M438 396 H642"/>
+      <path d="M438 424 H642"/>
+      <path d="M438 452 H642"/>
+    </g>
+    <rect x="465" y="332" width="16" height="168" fill="#68727D"/>
+    <rect x="599" y="332" width="16" height="168" fill="#68727D"/>
+  </g>
+  <g>
+    <rect x="220" y="250" width="260" height="110" rx="6" fill="#DCC79B"/>
+    <g stroke="#B49A66" stroke-width="5">
+      <path d="M240 280 H460"/>
+      <path d="M240 310 H460"/>
+      <path d="M240 340 H460"/>
+    </g>
+    <rect x="270" y="234" width="16" height="142" fill="#8A6A3C"/>
+    <rect x="414" y="234" width="16" height="142" fill="#8A6A3C"/>
+  </g>
+  <g fill="#F5B51B">
+    <rect x="120" y="470" width="90" height="16" rx="4"/>
+    <rect x="560" y="470" width="90" height="16" rx="4"/>
+  </g>
+  <g stroke="#20252B" stroke-width="10" opacity="0.7">
+    <path d="M100 555 H700"/>
+  </g>
+</svg>

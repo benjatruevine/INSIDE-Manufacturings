@@ -1,0 +1,11 @@
+{
+  "name": "kibbooya-scrap-yard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KIBOOYA SCRAP YARD — scrap metals, plastics, polythene, waste paper and used iron sheets dealer website (static HTML/CSS/JS)",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check js/main.js && node --check server.js"
+  }
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Kibbooya Scrap Yard — scrap metals, plastics, polythene, waste paper and used iron sheets in Uganda">
+  <rect width="1200" height="630" fill="#20252B"/>
+  <rect y="560" width="1200" height="14" fill="#F5B51B"/>
+  <rect y="588" width="1200" height="10" fill="#176B45"/>
+  <g opacity="0.14" stroke="#F3F5F6" stroke-width="3">
+    <path d="M0 90 H1200 M0 170 H1200 M0 250 H1200 M0 330 H1200 M0 410 H1200 M0 490 H1200"/>
+  </g>
+  <g transform="translate(90,120)">
+    <rect width="150" height="150" rx="22" fill="#2B323A" stroke="#3A424B" stroke-width="2"/>
+    <g fill="#F5B51B">
+      <rect x="42" y="34" width="17" height="74"/>
+      <path d="M65 68 L100 34 h20 L80 72 z"/>
+      <path d="M65 72 L100 106 h20 L80 73 z"/>
+    </g>
+    <g fill="none" stroke="#176B45" stroke-width="8" stroke-linecap="square">
+      <path d="M34 122 H64 l7 -9"/>
+      <path d="M116 122 H86 l-7 -9"/>
+    </g>
+  </g>
+  <text x="280" y="200" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="82" font-weight="800" fill="#F5B51B" letter-spacing="6">KIBOOYA</text>
+  <text x="280" y="285" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="58" font-weight="700" fill="#F3F5F6" letter-spacing="14">SCRAP YARD</text>
+  <text x="282" y="350" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="27" font-weight="500" fill="#AEB8C1" letter-spacing="3">Scrap Metals • Plastics • Polythene • Waste Paper • Iron Sheets</text>
+  <text x="282" y="420" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="30" font-weight="600" fill="#FFFFFF">Your Trusted Partner for Scrap Materials.</text>
+  <text x="282" y="490" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="26" font-weight="500" fill="#176B45">Call or WhatsApp 0706354801 • 0787878831</text>
+  <g transform="translate(980,120)" opacity="0.9">
+    <path d="M60 0 L120 104 H0 Z" fill="none" stroke="#F5B51B" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M60 34 L92 90 H28 Z" fill="#176B45"/>
+  </g>
+</svg>

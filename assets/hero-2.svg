@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Stacks of used corrugated iron roofing sheets in a yard">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#39434E"/>
+      <stop offset="1" stop-color="#98845E"/>
+    </linearGradient>
+    <pattern id="ridge" width="26" height="10" patternUnits="userSpaceOnUse">
+      <rect width="26" height="10" fill="#6E7781"/>
+      <path d="M0 10 Q6.5 0 13 10 Q19.5 0 26 10" fill="none" stroke="#59626C" stroke-width="3"/>
+    </pattern>
+    <pattern id="rust" width="26" height="10" patternUnits="userSpaceOnUse">
+      <rect width="26" height="10" fill="#8C6A4A"/>
+      <path d="M0 10 Q6.5 0 13 10 Q19.5 0 26 10" fill="none" stroke="#6E5238" stroke-width="3"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky2)"/>
+  <path d="M0 500 H1600 V900 H0 Z" fill="#343B43"/>
+  <g>
+    <path d="M120 780 L900 620 L1480 760 L1480 830 L120 850 Z" fill="url(#ridge)"/>
+    <path d="M180 850 L940 700 L1420 810 L1420 860 L180 880 Z" fill="url(#rust)"/>
+    <path d="M240 700 L880 560 L1360 680 L1360 720 L240 745 Z" fill="url(#ridge)"/>
+  </g>
+  <g stroke="#F5B51B" stroke-width="8" opacity="0.8">
+    <path d="M300 760 L300 830"/>
+    <path d="M900 660 L900 720"/>
+    <path d="M1200 720 L1200 790"/>
+  </g>
+  <g fill="#20252B" opacity="0.9">
+    <rect x="80" y="820" width="1440" height="14"/>
+    <rect x="140" y="860" width="1320" height="12"/>
+  </g>
+  <g fill="#454E58">
+    <path d="M0 500 L90 420 L180 500 Z"/>
+    <rect x="1360" y="380" width="120" height="120"/>
+    <rect x="1340" y="500" width="160" height="26"/>
+  </g>
+  <circle cx="1300" cy="180" r="56" fill="#F5B51B" opacity="0.5"/>
+</svg>

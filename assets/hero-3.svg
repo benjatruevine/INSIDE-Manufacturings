@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Crates and bundles of recyclable plastics at a collection point">
+  <defs>
+    <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E3840"/>
+      <stop offset="1" stop-color="#5E6E66"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky3)"/>
+  <path d="M0 520 H1600 V900 H0 Z" fill="#303840"/>
+  <g>
+    <rect x="140" y="560" width="360" height="220" rx="10" fill="#176B45"/>
+    <rect x="160" y="580" width="320" height="180" rx="6" fill="#1E8557"/>
+    <g fill="#DCE3E8" opacity="0.9">
+      <rect x="185" y="500" width="34" height="90" rx="8"/>
+      <rect x="235" y="485" width="34" height="105" rx="8"/>
+      <rect x="285" y="505" width="34" height="85" rx="8"/>
+      <rect x="335" y="490" width="34" height="100" rx="8"/>
+      <rect x="385" y="500" width="34" height="90" rx="8"/>
+      <rect x="435" y="495" width="34" height="95" rx="8"/>
+    </g>
+  </g>
+  <g>
+    <rect x="560" y="600" width="320" height="180" rx="10" fill="#F5B51B"/>
+    <rect x="580" y="620" width="280" height="140" rx="6" fill="#DFA20E"/>
+    <g fill="#20252B" opacity="0.85">
+      <rect x="605" y="545" width="30" height="80" rx="14"/>
+      <rect x="650" y="530" width="30" height="95" rx="14"/>
+      <rect x="695" y="550" width="30" height="75" rx="14"/>
+      <rect x="740" y="535" width="30" height="90" rx="14"/>
+      <rect x="785" y="545" width="30" height="80" rx="14"/>
+    </g>
+  </g>
+  <g>
+    <path d="M960 780 V620 q0 -30 30 -30 h300 q30 0 30 30 V780 Z" fill="#68727D"/>
+    <path d="M985 755 V640 q0 -16 16 -16 h268 q16 0 16 16 V755 Z" fill="#7E8892"/>
+    <g fill="#E8EDF1" opacity="0.92">
+      <circle cx="1030" cy="600" r="28"/>
+      <circle cx="1090" cy="585" r="24"/>
+      <circle cx="1145" cy="602" r="27"/>
+      <circle cx="1200" cy="588" r="23"/>
+      <circle cx="1250" cy="605" r="26"/>
+    </g>
+    <g fill="#176B45" opacity="0.9">
+      <circle cx="1060" cy="645" r="22"/>
+      <circle cx="1120" cy="655" r="20"/>
+      <circle cx="1175" cy="645" r="23"/>
+      <circle cx="1230" cy="658" r="19"/>
+    </g>
+  </g>
+  <g stroke="#20252B" stroke-width="12" opacity="0.85">
+    <path d="M60 800 H1540"/>
+  </g>
+  <circle cx="300" cy="200" r="60" fill="#F3F5F6" opacity="0.18"/>
+</svg>

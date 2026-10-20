@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Sorting and storage area with labelled material piles in a scrap yard">
+  <defs>
+    <linearGradient id="ssky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#35404A"/>
+      <stop offset="1" stop-color="#6F7F72"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#ssky)"/>
+  <path d="M0 320 H800 V600 H0 Z" fill="#39424B"/>
+  <g stroke="#20252B" stroke-width="6" opacity="0.9">
+    <path d="M260 600 V360 H540 V600"/>
+    <path d="M260 360 L400 300 L540 360"/>
+  </g>
+  <path d="M300 600 C320 480 380 440 400 440 C420 440 480 480 500 600 Z" fill="#525C66"/>
+  <g stroke="#8A939D" stroke-width="7" stroke-linecap="round">
+    <path d="M330 540 L400 500"/>
+    <path d="M350 580 L430 530"/>
+  </g>
+  <path d="M40 600 C60 510 140 480 190 510 C220 470 270 490 290 600 Z" fill="#176B45"/>
+  <path d="M510 600 C530 520 600 490 650 520 C690 490 750 530 770 600 Z" fill="#8C6A4A"/>
+  <g fill="#F5B51B">
+    <rect x="140" y="330" width="10" height="80"/>
+    <rect x="120" y="330" width="50" height="26" rx="4"/>
+    <rect x="650" y="330" width="10" height="80"/>
+    <rect x="630" y="330" width="50" height="26" rx="4"/>
+  </g>
+  <g stroke="#20252B" stroke-width="8" opacity="0.8">
+    <path d="M30 560 H770"/>
+  </g>
+  <g fill="#A64B2A" opacity="0.85">
+    <path d="M60 590 L100 520 L140 590 Z"/>
+  </g>
+</svg>

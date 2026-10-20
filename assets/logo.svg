@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Kibbooya Scrap Yard logo">
+  <rect width="128" height="128" rx="18" fill="#20252B"/>
+  <rect x="14" y="14" width="100" height="100" rx="10" fill="none" stroke="#3A424B" stroke-width="2"/>
+  <g fill="#F5B51B">
+    <rect x="36" y="30" width="15" height="62"/>
+    <path d="M56 60 L86 30 h17 L68 63 z"/>
+    <path d="M56 64 L86 94 h17 L68 65 z"/>
+  </g>
+  <g fill="none" stroke="#176B45" stroke-width="7" stroke-linecap="square">
+    <path d="M30 104 H56 l6 -8"/>
+    <path d="M98 104 H72 l-6 -8"/>
+    <path d="M40 100 l-4 -9 h10"/>
+  </g>
+</svg>

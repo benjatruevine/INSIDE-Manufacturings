@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" role="img" aria-label="Recyclable plastic bottles and containers in a collection crate">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E7ECEF"/>
+      <stop offset="1" stop-color="#C9D2D8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" fill="url(#pbg)"/>
+  <rect y="480" width="800" height="160" fill="#B4BEC6"/>
+  <rect x="150" y="290" width="500" height="240" rx="14" fill="#176B45"/>
+  <rect x="175" y="315" width="450" height="190" rx="8" fill="#1E8557"/>
+  <g fill="#F3F5F6" opacity="0.95">
+    <path d="M215 200 h36 l10 30 v140 q0 12 -12 12 h-32 q-12 0 -12 -12 V230 Z"/>
+    <rect x="222" y="185" width="22" height="20" rx="4" fill="#68727D"/>
+    <path d="M295 180 h36 l10 30 v160 q0 12 -12 12 h-32 q-12 0 -12 -12 V210 Z"/>
+    <rect x="302" y="165" width="22" height="20" rx="4" fill="#F5B51B"/>
+    <path d="M375 210 h36 l10 26 v134 q0 12 -12 12 h-32 q-12 0 -12 -12 V236 Z"/>
+    <rect x="382" y="196" width="22" height="18" rx="4" fill="#68727D"/>
+    <path d="M455 175 h36 l10 30 v165 q0 12 -12 12 h-32 q-12 0 -12 -12 V205 Z"/>
+    <rect x="462" y="160" width="22" height="20" rx="4" fill="#176B45"/>
+    <path d="M535 205 h36 l10 28 v137 q0 12 -12 12 h-32 q-12 0 -12 -12 V233 Z"/>
+    <rect x="542" y="190" width="22" height="18" rx="4" fill="#F5B51B"/>
+  </g>
+  <g fill="#DCE3E8" opacity="0.9">
+    <path d="M620 400 h50 l12 24 v56 q0 10 -12 10 h-50 q-12 0 -12 -10 v-56 Z"/>
+    <rect x="634" y="382" width="24" height="20" rx="4" fill="#68727D"/>
+  </g>
+  <g stroke="#20252B" stroke-width="10" opacity="0.7">
+    <path d="M120 560 H680"/>
+  </g>
+</svg>

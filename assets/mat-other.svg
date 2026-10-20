@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" role="img" aria-label="Assorted mixed scrap materials on a pallet">
+  <defs>
+    <linearGradient id="obg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E9EDF0"/>
+      <stop offset="1" stop-color="#CBD3D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="640" fill="url(#obg)"/>
+  <rect y="500" width="800" height="140" fill="#B5BEC6"/>
+  <g fill="#8A6A3C">
+    <rect x="180" y="470" width="440" height="24" rx="4"/>
+    <rect x="200" y="494" width="24" height="30"/>
+    <rect x="380" y="494" width="24" height="30"/>
+    <rect x="560" y="494" width="24" height="30"/>
+  </g>
+  <g>
+    <circle cx="290" cy="380" r="70" fill="#2B3138"/>
+    <circle cx="290" cy="380" r="38" fill="#68727D"/>
+    <circle cx="290" cy="380" r="16" fill="#2B3138"/>
+  </g>
+  <g fill="#A64B2A">
+    <path d="M400 470 L470 300 L540 470 Z"/>
+    <path d="M430 400 H510" stroke="#7E3A20" stroke-width="8"/>
+  </g>
+  <g fill="#6E7781">
+    <rect x="540" y="360" width="110" height="110" rx="8"/>
+    <rect x="558" y="378" width="74" height="74" rx="4" fill="#98A2AB"/>
+    <circle cx="595" cy="415" r="16" fill="#4A545F"/>
+  </g>
+  <g fill="#176B45">
+    <rect x="170" y="390" width="70" height="80" rx="10"/>
+    <rect x="182" y="378" width="46" height="14" rx="4" fill="#125536"/>
+  </g>
+  <g fill="#F5B51B">
+    <path d="M330 300 l30 -50 l30 50 l-16 0 l-14 -24 l-14 24 Z"/>
+    <rect x="344" y="300" width="32" height="46" rx="4"/>
+  </g>
+  <g stroke="#20252B" stroke-width="10" opacity="0.7">
+    <path d="M120 555 H680"/>
+  </g>
+</svg>

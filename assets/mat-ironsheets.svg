@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" role="img" aria-label="Stack of used corrugated iron roofing sheets">
+  <defs>
+    <pattern id="zinc" width="24" height="12" patternUnits="userSpaceOnUse">
+      <rect width="24" height="12" fill="#9AA4AD"/>
+      <path d="M0 12 Q6 0 12 12 Q18 0 24 12" fill="none" stroke="#7E8892" stroke-width="3"/>
+    </pattern>
+    <pattern id="zincrust" width="24" height="12" patternUnits="userSpaceOnUse">
+      <rect width="24" height="12" fill="#A97A52"/>
+      <path d="M0 12 Q6 0 12 12 Q18 0 24 12" fill="none" stroke="#845F40" stroke-width="3"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="640" fill="#E4E9ED"/>
+  <rect y="480" width="800" height="160" fill="#C3CBD2"/>
+  <path d="M90 470 L400 360 L710 460 L710 500 L90 515 Z" fill="url(#zinc)"/>
+  <path d="M120 530 L420 430 L690 520 L690 555 L120 570 Z" fill="url(#zincrust)"/>
+  <path d="M150 410 L410 320 L660 405 L660 435 L150 450 Z" fill="url(#zinc)"/>
+  <g fill="#20252B" opacity="0.85">
+    <rect x="80" y="575" width="640" height="12"/>
+    <rect x="110" y="600" width="580" height="10"/>
+  </g>
+  <g stroke="#F5B51B" stroke-width="8">
+    <path d="M240 445 V500"/>
+    <path d="M430 395 V455"/>
+    <path d="M580 460 V530"/>
+  </g>
+</svg>
