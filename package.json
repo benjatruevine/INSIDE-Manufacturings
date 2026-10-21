@@ -1,11 +1,14 @@
 {
-  "name": "kibbooya-scrap-yard",
+  "name": "inside-manufacturing",
   "version": "1.0.0",
   "private": true,
-  "description": "KIBOOYA SCRAP YARD — scrap metals, plastics, polythene, waste paper and used iron sheets dealer website (static HTML/CSS/JS)",
+  "description": "INSIDE MANUFACTURING — factory setup support, industrial machinery sourcing, international procurement and logistics coordination",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "check": "node --check js/main.js && node --check server.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
   }
 }

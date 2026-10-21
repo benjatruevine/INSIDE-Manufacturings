@@ -1,12 +1,44 @@
 /* ============================================================
-   KIBOOYA SCRAP YARD — main.js
-   Classic script (works over http:// and file://), organised
-   as small isolated modules.
-   ============================================================ */
+    INSIDE MANUFACTURING — main.js
+    Classic script (works over http:// and file://), organised
+    as small isolated modules around one central configuration.
+    ============================================================ */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* =========================================================
+     CENTRAL CONFIGURATION
+     One place to update the phone / WhatsApp numbers and
+     messages. All WhatsApp links use the WhatsApp number.
+     ========================================================= */
+  var WA = {
+    number: "256751748046",
+    display: "+256 751 748046",
+    phoneDisplay: "+256 708 094751",
+    brand: "INSIDE MANUFACTURING",
+    messages: {
+      general:
+        "Hello INSIDE MANUFACTURING, I would like to discuss a factory setup, machinery sourcing, or international procurement project. Please let me know the next steps.",
+      project:
+        "Hello INSIDE MANUFACTURING, I saw your website and would like to discuss a manufacturing project — factory setup, machinery, or procurement requirements.",
+      factory:
+        "Hello INSIDE MANUFACTURING, I am planning to start a factory and would like to discuss factory setup requirements, equipment, and sourcing options.",
+      sourcing:
+        "Hello INSIDE MANUFACTURING, I would like to discuss international sourcing opportunities for machinery and industrial equipment (China, India, Pakistan, Dubai).",
+      service: function (name) {
+        return (
+          "Hello INSIDE MANUFACTURING, I am interested in your " +
+          name +
+          " service and would like to discuss my project requirements."
+        );
+      }
+    },
+    url: function (message) {
+      return "https://wa.me/" + WA.number + "?text=" + encodeURIComponent(message);
+    }
+  };
 
   /* ---------------------------------------------------------
      Image fallback — a broken file never breaks the layout
@@ -14,9 +46,10 @@
   var FALLBACK_IMG =
     "data:image/svg+xml," +
     encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480">' +
-        '<rect width="600" height="480" fill="#e7ecef"/>' +
-        '<text x="300" y="250" font-family="Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="10" fill="#68727d" text-anchor="middle">KIBOOYA</text>' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">' +
+        '<rect width="600" height="400" fill="#10243A"/>' +
+        '<text x="300" y="210" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="6" fill="#F28C28" text-anchor="middle">INSIDE</text>' +
+        '<text x="300" y="245" font-family="Arial,sans-serif" font-size="14" letter-spacing="8" fill="#FFFFFF" text-anchor="middle">MANUFACTURING</text>' +
         "</svg>"
     );
 
@@ -50,11 +83,10 @@
     }
 
     toggle.addEventListener("click", function () {
-      var next =
-        root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try {
-        localStorage.setItem("kibbooya-theme", next);
+        localStorage.setItem("im-theme", next);
       } catch (e) { /* private mode */ }
       syncLabel();
     });
@@ -103,7 +135,7 @@
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       nav.classList.toggle("is-open", open);
-      header.classList.toggle("is-open", open);
+      if (header) header.classList.toggle("is-open", open);
       document.body.classList.toggle("is-locked", open);
     }
 
@@ -132,7 +164,7 @@
       }
     });
 
-    window.matchMedia("(min-width: 921px)").addEventListener("change", function (event) {
+    window.matchMedia("(min-width: 961px)").addEventListener("change", function (event) {
       if (event.matches) setOpen(false);
     });
   })();
@@ -163,7 +195,6 @@
     var focusPaused = false;
     var INTERVAL = 6000;
 
-    // Build accessible dots
     var dots = slides.map(function (_, i) {
       var dot = document.createElement("button");
       dot.type = "button";
@@ -235,8 +266,6 @@
       next(true);
     });
 
-    // Hovering the control strip pauses autoplay; the rest of the hero
-    // stays live so the carousel keeps breathing while the copy is read.
     var hoverTarget = controls || hero;
     hoverTarget.addEventListener("mouseenter", function () {
       hoverPaused = true;
@@ -281,39 +310,78 @@
   })();
 
   /* ---------------------------------------------------------
-     Scrap materials enquiry form → composed WhatsApp message
+     WhatsApp links — every [data-wa] / [data-wa-service]
      --------------------------------------------------------- */
-  (function enquiryModule() {
-    var form = document.getElementById("enquiryForm");
+  (function whatsappModule() {
+    var nodes = Array.prototype.slice.call(
+      document.querySelectorAll("[data-wa], [data-wa-service]")
+    );
+    if (!nodes.length) return;
+
+    nodes.forEach(function (el) {
+      var service = el.getAttribute("data-wa-service");
+      var message;
+
+      if (service) {
+        message = WA.messages.service(service);
+      } else {
+        var key = el.getAttribute("data-wa") || "general";
+        message = WA.messages[key] || WA.messages.general;
+      }
+
+      el.setAttribute("href", WA.url(message));
+      if (!el.getAttribute("target")) {
+        el.setAttribute("target", "_blank");
+        el.setAttribute("rel", "noopener");
+      }
+    });
+  })();
+
+  /* ---------------------------------------------------------
+     Enquiry form → composed WhatsApp message
+     Nothing is stored on the site; the visitor sends the
+     pre-filled message themselves in WhatsApp.
+     --------------------------------------------------------- */
+  (function bookingModule() {
+    var form = document.getElementById("bookingForm");
     if (!form) return;
 
-    var status = document.getElementById("enquiryStatus");
-    var WA_NUMBER = "256706354801";
+    var status = document.getElementById("bookingStatus");
 
     var fields = [
-      { id: "enName", errorId: "enNameError", test: function (v) { return v.trim().length > 1; } },
-      { id: "enPhone", errorId: "enPhoneError", test: function (v) { return /^[+()\d][\d\s()+-]{5,19}$/.test(v.trim()); } },
-      { id: "enType", errorId: "enTypeError", test: function (v) { return v !== ""; } },
-      { id: "enMaterial", errorId: "enMaterialError", test: function (v) { return v !== ""; } },
-      { id: "enMessage", errorId: "enMessageError", test: function (v) { return v.trim().length > 2; } }
+      { id: "bkName", errorId: "bkNameError", test: function (v) { return v.trim().length > 1; } },
+      { id: "bkPhone", errorId: "bkPhoneError", test: function (v) { return v.trim().length >= 8; } },
+      { id: "bkService", errorId: "bkServiceError", test: function (v) { return v !== ""; } },
+      { id: "bkNotes", errorId: "bkNotesError", test: function (v) { return v.trim().length > 4; } }
     ];
+
+    function setError(input, errorId, invalid) {
+      if (!input) return;
+      input.setAttribute("aria-invalid", String(invalid));
+      var error = document.getElementById(errorId);
+      if (error) error.hidden = !invalid;
+    }
+
+    var bkEmail = document.getElementById("bkEmail");
+    if (bkEmail) {
+      bkEmail.addEventListener("input", function () {
+        var value = bkEmail.value.trim();
+        if (!value) {
+          setError(bkEmail, "bkEmailError", false);
+          return;
+        }
+        setError(bkEmail, "bkEmailError", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+      });
+    }
 
     fields.forEach(function (field) {
       var input = document.getElementById(field.id);
       if (!input) return;
       input.addEventListener("input", function () {
-        if (field.test(input.value)) {
-          input.removeAttribute("aria-invalid");
-          var error = document.getElementById(field.errorId);
-          if (error) error.hidden = true;
-        }
+        if (field.test(input.value)) setError(input, field.errorId, false);
       });
       input.addEventListener("change", function () {
-        if (field.test(input.value)) {
-          input.removeAttribute("aria-invalid");
-          var error = document.getElementById(field.errorId);
-          if (error) error.hidden = true;
-        }
+        if (field.test(input.value)) setError(input, field.errorId, false);
       });
     });
 
@@ -329,41 +397,165 @@
         var value = input.value;
         data[field.id] = value;
         var valid = field.test(value);
-        input.setAttribute("aria-invalid", String(!valid));
-        var error = document.getElementById(field.errorId);
-        if (error) error.hidden = valid;
+        setError(input, field.errorId, !valid);
         if (!valid && !firstInvalid) firstInvalid = input;
       });
 
+      if (bkEmail && bkEmail.value.trim()) {
+        var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(bkEmail.value.trim());
+        setError(bkEmail, "bkEmailError", !emailValid);
+        if (!emailValid && !firstInvalid) firstInvalid = bkEmail;
+      }
+
       if (firstInvalid) {
-        if (status) status.textContent = "Please complete the highlighted fields.";
+        if (status) status.textContent = "Please complete the required fields.";
         firstInvalid.focus();
         return;
       }
 
-      var quantity = (document.getElementById("enQuantity") || {}).value || "";
-      var condition = (document.getElementById("enCondition") || {}).value || "";
-
+      var market = (document.getElementById("bkMarket") || {}).value || "";
+      var budget = (document.getElementById("bkBudget") || {}).value || "";
       var message =
-        "Hello KIBOOYA SCRAP YARD," +
-        "\n\nName: " + data.enName.trim() +
-        "\nPhone: " + data.enPhone.trim() +
-        "\nEnquiry: " + data.enType +
-        "\nMaterial: " + data.enMaterial +
-        (quantity.trim() ? "\nEstimated Quantity: " + quantity.trim() : "") +
-        (condition.trim() ? "\nCondition: " + condition.trim() : "") +
-        "\n\nMessage: " + data.enMessage.trim() +
-        "\n\nPlease let me know the available options and pricing. Thank you.";
+        "Hello " + WA.brand + ", I would like to discuss a project." +
+        "\n\nName: " + data.bkName.trim() +
+        "\nPhone: " + data.bkPhone.trim() +
+        (bkEmail && bkEmail.value.trim() ? "\nEmail: " + bkEmail.value.trim() : "") +
+        "\nService Required: " + data.bkService +
+        (market ? "\nPreferred Sourcing Market: " + market : "") +
+        (budget ? "\nEstimated Budget: " + budget.trim() : "") +
+        "\nProject Description: " + data.bkNotes.trim() +
+        "\n\n(Enquiry sent from the INSIDE MANUFACTURING website)";
 
       if (status) {
-        status.textContent = "Opening WhatsApp with your enquiry…";
+        status.textContent =
+          "Opening WhatsApp with your enquiry — press send in WhatsApp to complete it.";
       }
 
-      window.open(
-        "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(message),
-        "_blank",
-        "noopener"
-      );
+      var win = window.open(WA.url(message), "_blank", "noopener");
+      if (!win && status) {
+        status.textContent =
+          "Your browser blocked the pop-up. Please allow pop-ups, or call " +
+          WA.phoneDisplay +
+          " / message us on WhatsApp at " +
+          WA.display +
+          " directly.";
+      }
+    });
+  })();
+
+  /* ---------------------------------------------------------
+     Gallery lightbox
+     --------------------------------------------------------- */
+  (function lightboxModule() {
+    var triggers = Array.prototype.slice.call(
+      document.querySelectorAll(".gallery__trigger")
+    );
+    var lightbox = document.getElementById("lightbox");
+    var img = document.getElementById("lightboxImg");
+    var caption = document.getElementById("lightboxCaption");
+    var closeBtn = document.getElementById("lightboxClose");
+    var prevBtn = document.getElementById("lightboxPrev");
+    var nextBtn = document.getElementById("lightboxNext");
+    if (!triggers.length || !lightbox || !img || !closeBtn) return;
+
+    var items = triggers.map(function (trigger) {
+      return {
+        src: trigger.getAttribute("data-full") || "",
+        alt: trigger.getAttribute("data-alt") || ""
+      };
+    });
+
+    var current = 0;
+    var lastFocused = null;
+    var closeTimer = null;
+
+    function render() {
+      var item = items[current];
+      if (!item) return;
+      img.src = item.src;
+      img.alt = item.alt;
+      if (caption) caption.textContent = item.alt;
+    }
+
+    function open(i, opener) {
+      current = (i + items.length) % items.length;
+      lastFocused = opener || document.activeElement;
+      if (closeTimer) {
+        window.clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      render();
+      lightbox.hidden = false;
+      document.body.classList.add("is-locked");
+      window.requestAnimationFrame(function () {
+        lightbox.classList.add("is-open");
+      });
+      closeBtn.focus();
+    }
+
+    function close() {
+      lightbox.classList.remove("is-open");
+      document.body.classList.remove("is-locked");
+      var finish = function () {
+        lightbox.hidden = true;
+        img.removeAttribute("src");
+      };
+      if (reduceMotion.matches) finish();
+      else closeTimer = window.setTimeout(finish, 340);
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    }
+
+    function step(delta) {
+      current = (current + delta + items.length) % items.length;
+      render();
+    }
+
+    triggers.forEach(function (trigger, i) {
+      trigger.addEventListener("click", function () {
+        open(i, trigger);
+      });
+    });
+
+    closeBtn.addEventListener("click", close);
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        step(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        step(1);
+      });
+    }
+
+    lightbox.addEventListener("click", function (event) {
+      if (event.target === lightbox) close();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (lightbox.hidden) return;
+      if (event.key === "Escape") {
+        close();
+      } else if (event.key === "ArrowLeft") {
+        step(-1);
+      } else if (event.key === "ArrowRight") {
+        step(1);
+      } else if (event.key === "Tab") {
+        var focusables = [closeBtn, prevBtn, nextBtn].filter(Boolean);
+        var first = focusables[0];
+        var last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        } else if (focusables.indexOf(document.activeElement) === -1) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     });
   })();
 
@@ -381,13 +573,12 @@
       return;
     }
 
-    // Gentle stagger for siblings inside the same grid
     var groups = new Map();
     items.forEach(function (item) {
       var parent = item.parentElement;
       if (!groups.has(parent)) groups.set(parent, 0);
       var order = groups.get(parent);
-      item.style.setProperty("--reveal-delay", order * 0.09 + "s");
+      item.style.setProperty("--reveal-delay", Math.min(order * 0.08, 0.4) + "s");
       groups.set(parent, order + 1);
     });
 
@@ -458,90 +649,106 @@
     var input = document.getElementById("chatInput");
     if (!stack || !panel || !toggle || !log || !form || !input) return;
 
-    var WA =
-      "https://wa.me/256706354801?text=" +
-      encodeURIComponent(
-        "Hello KIBOOYA SCRAP YARD, I would like to enquire about your scrap materials and services. Please share more information."
-      );
-
-    var MAPS =
-      "https://www.google.com/maps/search/?api=1&query=" +
-      encodeURIComponent("Sonde-Sseta-Namungongo Road, Uganda");
+    var WA_LINK = {
+      href: WA.url(WA.messages.general),
+      label: "Discuss your project on WhatsApp"
+    };
 
     var DEFAULT_CHIPS = [
-      "Where are you?",
-      "What materials?",
-      "I want to sell scrap",
-      "Prices",
-      "Talk to a person"
+      "What services do you offer?",
+      "Factory setup",
+      "Machinery sourcing",
+      "Discuss a project"
     ];
 
     var KB = [
       {
-        keys: ["hello", "hi ", "hey", "good morning", "good afternoon", "good evening", "salut", "hola"],
-        text: "Hello and welcome to KIBOOYA SCRAP YARD. I can help with our location, the materials we deal in, and how to reach the team.",
-        chips: ["Where are you?", "What materials?", "I want to sell scrap"]
+        keys: ["hello", "hi ", "hey", "good morning", "good afternoon", "good evening"],
+        text:
+          "Welcome to INSIDE MANUFACTURING. We support investors with factory setup, industrial machinery sourcing, international procurement, and logistics coordination.",
+        chips: ["What services do you offer?", "Discuss a project"]
       },
       {
-        keys: ["where", "address", "location", "located", "find you", "yard", "direction", "map", "situated", "road"],
-        text: "You'll find us along Sonde–Sseta–Namungongo Road in Uganda.",
-        link: { label: "Open in Maps", href: MAPS },
-        chips: ["What materials?", "Talk to a person"]
+        keys: ["service", "services", "offer", "what do you do", "solutions"],
+        text:
+          "Our services include factory setup consultation, industrial machinery sourcing, international procurement, China / India / Pakistan / Dubai sourcing, logistics coordination, and production planning.",
+        link: { label: "View all services", href: "#services" },
+        chips: ["Factory setup", "Discuss a project"]
       },
       {
-        keys: ["material", "materials", "metal", "metals", "iron", "roofing", "sheet", "sheets", "plastic", "plastics", "polythene", "paper", "waste"],
-        text: "We deal in scrap metals, used iron sheets, plastics, polythene, waste paper, and other scrap materials. Enquire on WhatsApp and the team will share the current requirements.",
-        link: { label: "Enquire on WhatsApp", href: WA },
-        chips: ["I want to sell scrap", "Prices", "Where are you?"]
+        keys: ["factory", "setup", "start a factory", "production", "manufacture", "plant"],
+        text:
+          "Setting up a factory involves product choice, production capacity, machinery, facility planning, suppliers, and logistics. Share your manufacturing idea and we can discuss the requirements step by step.",
+        link: { label: "Start a factory setup discussion", href: WA.url(WA.messages.factory) },
+        chips: ["Machinery sourcing", "Discuss a project"]
       },
       {
-        keys: ["sell", "selling", "sell scrap", "i have", "i'm selling", "dispose"],
-        text: "To sell scrap, call or WhatsApp the team on 0706354801 with the material type and estimated quantity. They will discuss requirements, pricing and next steps with you.",
-        link: { label: "Sell on WhatsApp", href: WA },
-        chips: ["Prices", "What materials?", "Where are you?"]
+        keys: ["machinery", "machine", "equipment", "equipment sourcing"],
+        text:
+          "We help identify suitable machinery and industrial equipment based on your production needs, technical specifications, and budget — including sourcing options in China, India, and Pakistan.",
+        link: { label: "Source machinery on WhatsApp", href: WA.url(WA.messages.service("Industrial Machinery Sourcing")) },
+        chips: ["Factory setup", "Discuss a project"]
       },
       {
-        keys: ["buy", "buying", "purchase", "need", "looking for", "supply"],
-        text: "To buy materials, message the team on WhatsApp describing the material and quantity you need — they will confirm what is currently available.",
-        link: { label: "Ask on WhatsApp", href: WA },
-        chips: ["What materials?", "Talk to a person"]
+        keys: ["china", "chinese"],
+        text:
+          "We help clients explore manufacturing machinery, industrial supplies, and potential supplier opportunities in China.",
+        link: { label: "Explore China sourcing", href: WA.url(WA.messages.service("China Sourcing")) },
+        chips: ["Machinery sourcing", "Discuss a project"]
       },
       {
-        keys: ["price", "pricing", "rate", "rates", "cost", "how much", "pay", "payment"],
-        text: "Pricing is discussed directly with the team based on material type, condition and quantity. Message them on WhatsApp for the current options.",
-        link: { label: "Ask about pricing", href: WA },
-        chips: ["I want to sell scrap", "What materials?"]
+        keys: ["india", "pakistan"],
+        text:
+          "We support sourcing inquiries for industrial equipment, machinery, and production inputs from India and Pakistan.",
+        link: { label: "Discuss sourcing", href: WA.url(WA.messages.sourcing) },
+        chips: ["China sourcing", "Discuss a project"]
       },
       {
-        keys: ["quantity", "how many", "kg", "tonne", "ton", "bag", "weight"],
-        text: "Share your estimated quantity along with the material type when you call or message — the team can then discuss the available options with you.",
-        link: { label: "Share on WhatsApp", href: WA },
-        chips: ["Prices", "I want to sell scrap"]
+        keys: ["dubai", "uae", "emirates"],
+        text:
+          "We assist businesses exploring procurement opportunities and supplier networks in Dubai and the wider UAE market.",
+        link: { label: "Explore UAE procurement", href: WA.url(WA.messages.service("Dubai and UAE Procurement")) },
+        chips: ["International procurement", "Discuss a project"]
       },
       {
-        keys: ["hour", "open", "closing", "time", "when can", "days"],
-        text: "Message the team on WhatsApp for the yard's current visiting and trading times.",
-        link: { label: "Ask on WhatsApp", href: WA },
-        chips: ["Where are you?", "Talk to a person"]
+        keys: ["procurement", "supplier", "quotation", "quote", "purchase"],
+        text:
+          "We support identifying suppliers, requesting quotations, comparing available options, and coordinating international procurement requirements.",
+        link: { label: "Discuss procurement", href: WA.url(WA.messages.service("International Procurement")) },
+        chips: ["Machinery sourcing", "Discuss a project"]
       },
       {
-        keys: ["collection", "collect", "transport", "delivery", "deliver", "pickup", "carry"],
-        text: "Delivery or collection arrangements, if available, are confirmed directly with the team — message or call them to discuss your situation.",
-        link: { label: "Ask the team", href: WA },
-        chips: ["Talk to a person", "Where are you?"]
+        keys: ["logistics", "shipping", "cargo", "delivery", "freight"],
+        text:
+          "We can discuss shipping arrangements, cargo movement, delivery requirements, and the logistics involved in international procurement.",
+        link: { label: "Discuss logistics", href: WA.url(WA.messages.service("Logistics Coordination")) },
+        chips: ["International procurement", "Discuss a project"]
       },
       {
-        keys: ["contact", "phone", "call", "number", "whatsapp", "talk", "speak", "person", "human", "staff", "team", "help"],
-        text: "You can call or WhatsApp the scrap yard on 0706354801 or 0787878831 — the team will be glad to help.",
-        link: { label: "Chat on WhatsApp", href: WA },
-        chips: ["Where are you?", "What materials?"]
+        keys: ["price", "pricing", "cost", "budget", "how much"],
+        text:
+          "Project scope, timelines, supplier arrangements, and costs depend on each investor's requirements and must be discussed individually. Share your project details and we can talk it through.",
+        link: WA_LINK,
+        chips: ["What services do you offer?", "Discuss a project"]
+      },
+      {
+        keys: ["contact", "whatsapp", "phone", "call", "number", "team", "uganda", "location"],
+        text:
+          "You can reach us by phone on " +
+          WA.phoneDisplay +
+          " or WhatsApp on " +
+          WA.display +
+          ". We are based in Uganda.",
+        link: { label: "Contact us", href: "#contact" },
+        chips: ["Discuss a project", "What services do you offer?"]
       }
     ];
 
     var FALLBACK = {
-      text: "I can help with our location, the materials we deal in, and contact details. For anything else, the team is one message away on WhatsApp.",
-      link: { label: "Chat on WhatsApp", href: WA },
-      chips: ["Where are you?", "What materials?", "Prices"]
+      text:
+        "I can help with factory setup, machinery sourcing, international procurement, and logistics coordination. Share a few details about your project, or continue on WhatsApp.",
+      link: { label: "Discuss your project", href: WA.url(WA.messages.project) },
+      chips: ["What services do you offer?", "Discuss a project"]
     };
 
     var greeted = false;
@@ -599,7 +806,7 @@
       window.setTimeout(function () {
         addMsg("bot", reply.text, reply.link);
         renderChips(reply.chips);
-      }, reduceMotion.matches ? 0 : 350);
+      }, reduceMotion.matches ? 0 : 320);
     }
 
     function setOpen(open) {
@@ -611,7 +818,7 @@
           greeted = true;
           addMsg(
             "bot",
-            "Welcome to KIBOOYA SCRAP YARD. Ask me about our location, the materials we deal in, or how to reach the team."
+            "Welcome to INSIDE MANUFACTURING. Ask me about factory setup, machinery sourcing, international procurement, or logistics coordination."
           );
           renderChips();
         }
@@ -654,7 +861,6 @@
       answer(text);
     });
 
-    // WhatsApp FAB closes the panel so both channels never overlap
     var waFab = stack.querySelector(".fab--wa");
     if (waFab) {
       waFab.addEventListener("click", function () {

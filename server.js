@@ -1,5 +1,5 @@
 /**
- * Zero-dependency static development server for the KIBOOYA SCRAP YARD site.
+ * Zero-dependency static development server for INSIDE MANUFACTURING.
  * Usage: node server.js  →  http://localhost:4173
  */
 "use strict";
@@ -22,7 +22,8 @@ const MIME = {
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
   ".ico": "image/x-icon",
-  ".woff2": "font/woff2"
+  ".woff2": "font/woff2",
+  ".mp3": "audio/mpeg"
 };
 
 function send(res, status, body, headers) {
@@ -55,5 +56,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`KIBOOYA SCRAP YARD site running at http://localhost:${PORT}`);
+  console.log(`INSIDE MANUFACTURING running at http://localhost:${PORT}`);
 });
